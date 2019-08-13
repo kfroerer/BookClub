@@ -3,6 +3,8 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const db = require('./models');
 const routes = require('./routes')
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 
 // Define middleware here

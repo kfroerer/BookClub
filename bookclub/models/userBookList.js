@@ -1,16 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
   const UserBookList = sequelize.define(
-    "UserBookList",
-    {
-      bookId: {type: DataTypes.INTEGER}
-    },
-    {
-      userId: {type: DataTypes.INTEGER}
-    },
-    {
-      status: {type: DataTypes.BOOLEAN}
-    }
-  )
+    "UserBookList", {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+      },
+    bookId: {type: DataTypes.UUID},
+    userId: {type: DataTypes.UUID},
+    status: {type: DataTypes.BOOLEAN}
+    });
 
   UserBookList.sync();
 

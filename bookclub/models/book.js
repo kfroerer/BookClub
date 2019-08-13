@@ -3,6 +3,12 @@ module.exports = (sequelize, DataTypes) => {
   const Book = sequelize.define(
     "Book",
     {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+      },
       title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -16,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       pages: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
       },
       status: {
         type: DataTypes.BOOLEAN,
@@ -36,13 +42,10 @@ module.exports = (sequelize, DataTypes) => {
 
   Book.associate = (models) => {
     Book.belongsToMany(models.User, {
-      as: "Books",
-      foreignKey: "BookId",
-      through: 'userBookList',
+      foreignKey: "bookId",
+      through: models.UserBookList,
     });
   }
-
-  Book.sync();
 
   return Book;
 };

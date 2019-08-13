@@ -1,4 +1,4 @@
-const db = require('./models');
+const db = require('../models');
 
 module.exports = {
   findAll: (request, response) => {
@@ -10,6 +10,38 @@ module.exports = {
   findById: (request, response) => {
     db.User
       .findById(request.params.id)
+      .then(data => response.json(data))
+      .catch(err => response.status(422).json(err));
+  },
+  findUsersBooks: (request, response) => {
+    db.User
+      .getBooks()
+      .then(data => response.json(data))
+      .catch(err => response.status(422).json(err));
+  },
+  findUsersUnreadBooks: (request, response) => {
+    db.User
+      .getBooks({
+        where: {status: 0}
+      })
+      .then(data => response.json(data))
+      .catch(err => response.status(422).json(err));
+  },
+  findUsersReadBooks: (request, response) => {
+    db.User
+      .getBooks({
+        where: {status: 1}
+      })
+      .then(data => response.json(data))
+      .catch(err => response.status(422).json(err));
+  },
+  deleteUserBook: (request, response) => {
+    db.User 
+      .removeBook({
+        where: {
+          bookId: request.params.id
+       }
+      })
       .then(data => response.json(data))
       .catch(err => response.status(422).json(err));
   },

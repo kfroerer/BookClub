@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const bookController = require("../controllers/book");
+const bookController = require('../controllers/book');
 
 // Matches with "/book"
 router
@@ -15,13 +15,13 @@ router
   .delete(bookController.remove);
 
   // Matches with "/book/read"
-router  
-  .route("/read")
-  .get(bookController.findReadBooks)
+// router  
+//   .route("/read")
+//   .get(bookController.findReadBooks)
 
   // Matches with "/book/unread"
- router
-  .route("/unread")
-  .get(bookController.findUnreadBooks)
+//  router
+//   .route("/unread")
+//   .get(bookController.findUnreadBooks)
 
 module.exports = router;

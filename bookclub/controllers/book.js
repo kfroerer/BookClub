@@ -1,4 +1,4 @@
-const db = require('./models');
+const db = require('../models');
 // TODO: figure out how to find books from jump table and get info from book table
 module.exports = {
   findAll: (request, response) => {
@@ -43,28 +43,6 @@ module.exports = {
     db.Book
       .findAll({
         where: {genre: request.params.genre}
-      })
-      .then(data => response.json(data))
-      .catch(err => response.status(422).json(err));
-  },
-  findReadBooks: (request, response) => {
-    db.Book
-      .findAll({
-        where: {
-          userId: request.params.id,
-          status: true},
-        include: [db.userBookList]
-
-      })
-      .then(data => response.json(data.userBookList))
-      .catch(err => response.status(422).json(err));
-  },
-  findUnreadBooks: (request, response ) => {
-    db.UserBookList
-      .findAll({
-        where: {
-          userId: request.params.id,
-          status: false}
       })
       .then(data => response.json(data))
       .catch(err => response.status(422).json(err));
